@@ -1,5 +1,6 @@
 package sample;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,7 +16,7 @@ public class Controller implements Initializable {
     private TextField txtDisplay;
     private int decimalClick = 0;
     private String generalOperationObject;
-    private double firstDouble;
+    private BigDecimal firstDouble;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -41,7 +42,7 @@ public class Controller implements Initializable {
             case "/":
             case "%":
                 String currentText = txtDisplay.getText();
-                firstDouble = Double.parseDouble(currentText);
+                firstDouble = new BigDecimal(currentText);
                 txtDisplay.setText("");
                 decimalClick = 0;
                 break;
@@ -72,27 +73,27 @@ public class Controller implements Initializable {
 
     @FXML
     private void handlerEqualAction(ActionEvent event) {
-        double secondDouble;
-        double result=0;
+        BigDecimal secondDecimal;
+        BigDecimal result = new BigDecimal(0.0000);
         String secondText = txtDisplay.getText();
-        secondDouble = Double.parseDouble(secondText);
+        secondDecimal = new BigDecimal(secondText);
 
         switch (generalOperationObject) {
             case "+":
-                result = firstDouble + secondDouble;
+                result = firstDouble.add(secondDecimal);
                 break;
             case "-":
-                result = firstDouble - secondDouble;
+                result = firstDouble.subtract(secondDecimal);
                 break;
             case "*":
-                result = firstDouble * secondDouble;
+                result = firstDouble.multiply(secondDecimal);
                 break;
             case "/":
-                result = firstDouble / secondDouble;
+                result = firstDouble.divide(secondDecimal);
                 break;
             default:
         }
-        String format = String.format("%.1f", result);
+        String format = String.format("%.6f", result);
         txtDisplay.setText(format);
 
     }

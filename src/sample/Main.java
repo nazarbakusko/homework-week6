@@ -19,6 +19,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("calculator.css");
         primaryStage.setTitle("Calculator");
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
